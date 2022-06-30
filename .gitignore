@@ -1,0 +1,4 @@
+*.wav
+/venv/
+!/master/template_master
+*.pyc
