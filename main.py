@@ -19,6 +19,7 @@ text_file = open(os.path.join(env.master_dir, env.rename_failed_file), 'w')
 
 # wav to speech recognition text
 wav_sentence_dict: Dict[str, str] = {}
+# read already exist wav_sentence_json
 if os.path.exists(os.path.join(env.master_dir, wav_sentence_json)):
     with open(os.path.join(env.master_dir, wav_sentence_json), 'r') as f:
         wav_sentence_dict = json.load(f)
