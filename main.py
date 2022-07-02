@@ -36,20 +36,20 @@ for wav_file in l:
 l = sorted(wav_sentence_dict.keys())
 for wav_file in l:
     voice_text = wav_sentence_dict[wav_file]
-    id, text, index, ratio = utils.check_sentence.search_id(voice_text)
-    print(f"id: {id}, voice: {voice_text}\n{' ' * (len(id) + 4)}current: {text}")
+    sentence_id, text, index, ratio = utils.check_sentence.search_id(voice_text)
+    print(f"id: {sentence_id}, voice: {voice_text}\n{' ' * (len(sentence_id) + 4)}current: {text}")
     # 閾値を超えた一致率のファイルをrename
     # ファイルが既にある場合
-    if os.path.exists(os.path.join(env.master_dir, env.out_dir_name, id + '.wav')):
+    if os.path.exists(os.path.join(env.master_dir, env.out_dir_name, sentence_id + '.wav')):
         # text 書き込み
-        text_file.write(f"EXISTS {id} {wav_file} {text}\n")
+        text_file.write(f"EXISTS {sentence_id} {wav_file} {text}\n")
         continue
     if ratio > env.threshold:
         # inputの音声ファイルをoutputにコピー・ファイル名を変更
-        os.system(f"cp {wav_file} {os.path.join(env.master_dir, env.out_dir_name, id + '.wav')}")
+        os.system(f"cp {wav_file} {os.path.join(env.master_dir, env.out_dir_name, sentence_id + '.wav')}")
     else:
         # text 書き込み
-        text_file.write(f"NONE {id} {wav_file} {text}\n")
+        text_file.write(f"NONE {sentence_id} {wav_file} {text}\n")
 text_file.close()
 
 # 抜けの確認
